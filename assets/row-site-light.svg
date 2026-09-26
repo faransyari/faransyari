@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 236" width="1200" height="236" role="img" aria-label="firlandiansyari.com: My site. Every page gets its own drawn landscape, including both campuses I studied at."><style>
+.tw{animation:tw 5s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.9}50%{opacity:.2}}
+.shoot{opacity:0;animation:shoot 11s linear infinite}
+@keyframes shoot{0%,86%{opacity:0;transform:translate(0,0)}88%{opacity:1}96%{opacity:0;transform:translate(var(--dx),var(--dy))}100%{opacity:0}}
+.flame{animation:fl 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes fl{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.12)}}
+.fan{animation:spin 2.4s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.steam{animation:steam 3.6s ease-in-out infinite;opacity:0}
+@keyframes steam{0%{opacity:0;transform:translateY(6px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-10px)}}
+.blink{animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.shoot,.steam{display:none}}
+</style>
+<line x1="0" y1="1" x2="1200" y2="1" stroke="#e3e3e3" stroke-width="2"/>
+<text x="0" y="66" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="20" fill="#9a9a9a">05</text>
+<g transform="translate(64 26)"><rect width="330" height="186" rx="16" fill="#f5f5f5" stroke="#e6e6e6" stroke-width="1.5"/>
+<defs><clipPath id="sc"><rect width="330" height="186" rx="16"/></clipPath><linearGradient id="hFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ebebeb" stop-opacity=".35"/><stop offset=".55" stop-color="#ebebeb"/></linearGradient><linearGradient id="hMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dedede" stop-opacity=".35"/><stop offset=".55" stop-color="#dedede"/></linearGradient><linearGradient id="hNear" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfcfcf" stop-opacity=".35"/><stop offset=".55" stop-color="#cfcfcf"/></linearGradient><linearGradient id="tail" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#bdbdbd"/><stop offset="1" stop-color="#bdbdbd" stop-opacity="0"/></linearGradient></defs>
+<g clip-path="url(#sc)">
+
+<mask id="sm"><rect x="247" y="29" width="30" height="30" fill="#fff"/><circle cx="267.85" cy="40.1" r="11.96" fill="#000"/></mask><circle cx="262" cy="44" r="13" fill="#d6d6d6" mask="url(#sm)"/>
+<path d="M-20 186 L-20 125.4 L17 114.3 L54 105.4 L61.9 110.4 L69.8 112.6 L77.8 119.8 L85.7 123.6 L98.7 113 L111.7 96.4 L124.7 84 L157.3 106.4 L190 129.9 L205.2 110.1 L220.4 87.5 L240 96 L259.6 108.5 L279.2 120.3 L298.4 100.1 L317.6 85.4 L336.8 68 L345.3 84 L353.8 95.8 L362.3 107.3 L370.9 123.3 L350 186 Z" fill="url(#hFar)"/>
+<path d="M-20 186 L-20 152.8 L-8.5 145.9 L3 143.8 L14.5 136.4 L26.1 130.4 L36.3 141.2 L46.5 149.4 L60.2 148.6 L73.9 141.8 L87.6 138.2 L101.2 134.2 L117 141.9 L132.9 146.9 L142.5 137.7 L152.2 129.7 L161.9 122.9 L171.6 118.3 L183 129.4 L194.4 145.1 L211.5 136.5 L228.6 132.3 L245 140.1 L261.4 148.2 L277.9 157.2 L294 144 L310.2 126.2 L317.1 134 L324 145.3 L330.9 156.4 L339.9 151.8 L349 139.2 L358 136.5 L367.1 126.6 L374.4 138.4 L381.8 147.1 L389.2 159.9 L350 186 Z" fill="url(#hMid)"/>
+<path d="M-20 186 L-20 175 L-2.4 174 L15.1 170.2 L32.7 166.1 L50.3 165.3 L72 169.9 L93.8 171.3 L115.6 174.5 L130.3 173.4 L144.9 167.6 L159.5 165.8 L197.4 169.7 L235.3 173.6 L253.6 170.9 L271.8 166.5 L290.1 165.1 L299.8 166.6 L309.5 169.6 L319.2 172.6 L328.9 175.3 L345.8 173.2 L362.7 167.2 L379.6 166.9 L396.5 162.2 L422.8 167.5 L449.2 174.3 L350 186 Z" fill="#cfcfcf"/>
+<path d="M26 152 L33.9 168.3 L18.1 168.3 Z M26 161.2 L37 175.1 L15 175.1 Z M26 169.1 L40.1 181.9 L11.9 181.9 Z M25 181.2 h2 v4.8 h-2 Z M44 142 L54.2 163.1 L33.8 163.1 Z M44 153.9 L58.2 171.9 L29.8 171.9 Z M44 164.2 L62.3 180.7 L25.7 180.7 Z M42.7 179.8 h2.6 v6.2 h-2.6 Z M290 146 L299.2 165.2 L280.8 165.2 Z M290 156.8 L302.9 173.2 L277.1 173.2 Z M290 166.2 L306.6 181.2 L273.4 181.2 Z M288.8 180.4 h2.4 v5.6 h-2.4 Z M308 156 L314.9 170.4 L301.1 170.4 Z M308 164.1 L317.7 176.4 L298.3 176.4 Z M308 171.1 L320.5 182.4 L295.5 182.4 Z M307.1 181.8 h1.8 v4.2 h-1.8 Z" fill="#949494"/>
+</g>
+<rect x="95" y="16" width="140" height="22" rx="11" fill="#f5f5f5" stroke="#e6e6e6"/>
+<rect x="108" y="25" width="14" height="4" rx="2" fill="#2b2b2b"/><rect x="132" y="25" width="14" height="4" rx="2" fill="#9a9a9a"/><rect x="156" y="25" width="14" height="4" rx="2" fill="#9a9a9a"/><rect x="180" y="25" width="14" height="4" rx="2" fill="#9a9a9a"/><rect x="204" y="25" width="14" height="4" rx="2" fill="#9a9a9a"/>
+<text font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="-.5" fill="#111111"><tspan x="24" y="72">Firlandi Althaf</tspan><tspan x="24" y="94">Ansyari</tspan></text></g>
+<text x="440" y="72" font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.2" fill="#111111">firlandiansyari.com</text>
+<text x="440" y="118" font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="26" fill="#6b6b6b">My site. Every page gets its own drawn landscape,</text><text x="440" y="154" font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="26" fill="#6b6b6b">including both campuses I studied at.</text>
+<text x="440" y="212" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="19" fill="#9a9a9a">next.js · framer motion · photos straight from drive</text>
+<text x="1200" y="66" text-anchor="end" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="19" fill="#9a9a9a">live ↗</text></svg>

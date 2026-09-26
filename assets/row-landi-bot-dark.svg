@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 236" width="1200" height="236" role="img" aria-label="landi-bot: A Discord moderation bot with no gateway at all. Discord posts to Vercel, the bot answers."><style>
+.tw{animation:tw 5s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.9}50%{opacity:.2}}
+.shoot{opacity:0;animation:shoot 11s linear infinite}
+@keyframes shoot{0%,86%{opacity:0;transform:translate(0,0)}88%{opacity:1}96%{opacity:0;transform:translate(var(--dx),var(--dy))}100%{opacity:0}}
+.flame{animation:fl 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes fl{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.12)}}
+.fan{animation:spin 2.4s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.steam{animation:steam 3.6s ease-in-out infinite;opacity:0}
+@keyframes steam{0%{opacity:0;transform:translateY(6px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-10px)}}
+.blink{animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.shoot,.steam{display:none}}
+</style>
+<line x1="0" y1="1" x2="1200" y2="1" stroke="#262b31" stroke-width="2"/>
+<text x="0" y="66" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="20" fill="#6e7680">03</text>
+<g transform="translate(64 26)"><rect width="330" height="186" rx="16" fill="#12161b" stroke="#242a31" stroke-width="1.5"/>
+<text x="22" y="30" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="12" fill="#6e7680">POST /api/interactions</text>
+<rect x="22" y="44" width="200" height="34" rx="17" fill="none" stroke="#dcdcdc" stroke-width="2"/>
+<text x="38" y="66" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="14" fill="#dcdcdc">/timeout @spam 10m</text>
+<rect x="100" y="94" width="208" height="54" rx="14" fill="#dcdcdc"/>
+<text x="116" y="117" font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#12161b">done.</text>
+<text x="116" y="137" font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="13" fill="#12161b" opacity=".75">back in ten minutes</text>
+<text x="22" y="172" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="12" fill="#6e7680">200 OK · 41ms</text>
+<rect x="138" y="162" width="8" height="12" fill="#6e7680" class="blink"/></g>
+<text x="440" y="72" font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.2" fill="#f0f0f0">landi-bot</text>
+<text x="440" y="118" font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="26" fill="#9ba3ab">A Discord moderation bot with no gateway at all.</text><text x="440" y="154" font-family="Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" font-size="26" fill="#9ba3ab">Discord posts to Vercel, the bot answers.</text>
+<text x="440" y="212" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="19" fill="#6e7680">typescript · vercel functions · neon postgres</text>
+<text x="1200" y="66" text-anchor="end" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="19" fill="#6e7680">private</text></svg>
