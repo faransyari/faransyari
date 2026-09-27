@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar, badges, limit_select with context %}
+{% block content %}
+<section class="hero">
+  <h1>Who followed them lately?</h1>
+  <p class="lede">Look up any Instagram account and see its most recent followers. Every lookup is saved, so the next one shows who's new.</p>
+
+  <form class="search" method="post" action="{{ url_for('lookup') }}" data-loading="Fetching followers…">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label class="search-field">
+      <span class="at" aria-hidden="true">@</span>
+      <input name="username" value="{{ request.args.get('u', '') }}" placeholder="username or profile link"
+             autocomplete="off" autocapitalize="off" spellcheck="false" required autofocus>
+    </label>
+    {{ limit_select(selected=20) }}
+    <button class="btn btn-primary" type="submit">Look up</button>
+  </form>
+
+  {% if not ig_user %}
+    <p class="notice">
+      Instagram only shows follower lists to signed-in accounts.
+      <a href="{{ url_for('account') }}">Sign in first</a>, then come back here.
+    </p>
+  {% endif %}
+</section>
+
+<section>
+  <div class="section-head">
+    <h2>Checked before</h2>
+    {% if tracked %}<span class="muted">{{ tracked|length }} account{{ '' if tracked|length == 1 else 's' }}</span>{% endif %}
+  </div>
+
+  {% if tracked %}
+    <ul class="cards">
+      {% for t in tracked %}
+        <li>
+          <a class="card" href="{{ url_for('profile', username=t.target) }}">
+            {{ avatar(t.profile_pic_url, t.target, 'lg') }}
+            <div class="card-body">
+              <div class="card-title">@{{ t.target }} {{ badges(t.is_verified, t.is_private) }}</div>
+              {% if t.full_name %}<div class="muted truncate">{{ t.full_name }}</div>{% endif %}
+              <div class="card-meta">
+                <span><strong>{{ t.follower_count | compact }}</strong> followers</span>
+                <span>checked {{ t.taken_at | ago }}</span>
+                <span>{{ t.checks }} check{{ '' if t.checks == 1 else 's' }}</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="empty">
+      <p>Nothing here yet. Accounts you look up will be listed here, with their follower history.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Account · Follower Lookup{% endblock %}
+{% block content %}
+<h1>Instagram account</h1>
+<p class="lede">Follower lists are only visible to signed-in accounts, so lookups run through an Instagram account of yours. A throwaway account is a good idea: heavy use can get it rate limited.</p>
+
+{% if ig_user %}
+  <section class="panel status-panel">
+    <div>
+      <span class="dot dot-ok" aria-hidden="true"></span>
+      Signed in as <strong>@{{ ig_user }}</strong>
+      <p class="muted small">The session is saved in <code>instance/sessions/</code>, so it survives restarts.</p>
+    </div>
+    <form method="post" action="{{ url_for('account_logout') }}" class="btn-row">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="btn" type="submit">Sign out</button>
+      <button class="btn btn-danger" type="submit" name="forget" value="1">Sign out and forget</button>
+    </form>
+  </section>
+{% endif %}
+
+{% if awaiting_2fa %}
+  <section class="panel">
+    <h2>Two-factor code for @{{ awaiting_2fa }}</h2>
+    <form class="stack" method="post" action="{{ url_for('account_2fa') }}" data-loading="Checking code…">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Code
+        <input name="code" inputmode="numeric" autocomplete="one-time-code" required autofocus>
+      </label>
+      <button class="btn btn-primary" type="submit">Verify</button>
+    </form>
+  </section>
+{% endif %}
+
+<div class="grid-2">
+  <section class="panel">
+    <h2>{{ 'Switch account' if ig_user else 'Sign in' }}</h2>
+    <p class="muted small">Your password goes straight to Instagram and isn't stored. Only the resulting session cookie is kept, on this machine.</p>
+    <form class="stack" method="post" action="{{ url_for('account_login') }}" data-loading="Signing in…">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Username
+        <input name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required>
+      </label>
+      <label>Password
+        <input name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <button class="btn btn-primary" type="submit">Sign in</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Use a browser session instead</h2>
+    <p class="muted small">
+      If Instagram blocks the password sign-in with a checkpoint, sign in on instagram.com in your browser,
+      open the developer tools, and copy the <code>sessionid</code> cookie (Application → Cookies).
+    </p>
+    <form class="stack" method="post" action="{{ url_for('account_cookie') }}" data-loading="Checking session…">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Username
+        <input name="username" autocapitalize="off" spellcheck="false" required>
+      </label>
+      <label>sessionid
+        <input name="sessionid" type="password" autocomplete="off" required>
+      </label>
+      <label><span>csrftoken <span class="muted">(optional)</span></span>
+        <input name="csrftoken" type="password" autocomplete="off">
+      </label>
+      <button class="btn" type="submit">Use this session</button>
+    </form>
+  </section>
+</div>
+
+{% set others = saved_sessions | reject('equalto', ig_user) | list %}
+{% if others %}
+  <section class="panel">
+    <h2>Saved sessions</h2>
+    <ul class="plain-list">
+      {% for name in others %}
+        <li>
+          <span>@{{ name }}</span>
+          <form method="post" action="{{ url_for('account_restore') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="username" value="{{ name }}">
+            <button class="btn btn-small" type="submit">Use</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
+{% endblock %}

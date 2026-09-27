@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Follower Lookup{% endblock %}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23d9480f'/><circle cx='16' cy='13' r='5' fill='white'/><path d='M7 26c1.5-5 5-7 9-7s7.5 2 9 7' fill='white'/></svg>">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="{{ url_for('index') }}">
+        <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" style="fill: var(--accent)"/><circle cx="16" cy="13" r="5" fill="#fff"/><path d="M7 26c1.5-5 5-7 9-7s7.5 2 9 7" fill="#fff"/></svg>
+        Follower Lookup
+      </a>
+      <nav>
+        <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}aria-current="page"{% endif %}>Lookup</a>
+        <a href="{{ url_for('account') }}" {% if request.endpoint == 'account' %}aria-current="page"{% endif %}>
+          {% if ig_user %}<span class="dot dot-ok" aria-hidden="true"></span>@{{ ig_user }}
+          {% else %}<span class="dot dot-off" aria-hidden="true"></span>Sign in{% endif %}
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}" role="{{ 'alert' if category == 'error' else 'status' }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="wrap footer">
+    Runs on your machine. Lookups use your own Instagram session, so keep them small and infrequent.
+  </footer>
+
+  <div class="loading" id="loading" hidden>
+    <div class="loading-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="loading-text">Asking Instagram…</p>
+      <p class="muted small">Instagram pages its lists slowly on purpose. Bigger lookups take longer.</p>
+    </div>
+  </div>
+</body>
+</html>

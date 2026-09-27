@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ error.code }} · Follower Lookup{% endblock %}
+{% block content %}
+<div class="empty empty-big">
+  <h1>{{ error.code }} · {{ error.name }}</h1>
+  <p>{{ error.description }}</p>
+  <a class="btn" href="{{ url_for('index') }}">Back to lookup</a>
+</div>
+{% endblock %}

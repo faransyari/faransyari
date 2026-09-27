@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar, badges, limit_select with context %}
+{% block title %}@{{ snap.target }} · Follower Lookup{% endblock %}
+{% block content %}
+<section class="profile">
+  {{ avatar(snap.profile_pic_url, snap.target, 'xl') }}
+  <div class="profile-main">
+    <h1>@{{ snap.target }} {{ badges(snap.is_verified, snap.is_private) }}</h1>
+    {% if snap.full_name %}<p class="profile-name">{{ snap.full_name }}</p>{% endif %}
+    {% if snap.biography %}<p class="bio">{{ snap.biography }}</p>{% endif %}
+    <p class="links">
+      {% if snap.external_url %}<a href="{{ snap.external_url }}" rel="noopener noreferrer" target="_blank">{{ snap.external_url | replace('https://', '') | replace('http://', '') }}</a> ·{% endif %}
+      <a href="https://www.instagram.com/{{ snap.target }}/" rel="noopener noreferrer" target="_blank">Open on Instagram ↗</a>
+    </p>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <span class="stat-num">{{ snap.follower_count | compact }}</span>
+    <span class="stat-label">followers</span>
+    {% if follower_delta is not none %}
+      <span class="delta {{ 'up' if follower_delta > 0 else 'down' if follower_delta < 0 else '' }}">
+        {{ '+' if follower_delta > 0 }}{{ follower_delta }} since previous check
+      </span>
+    {% endif %}
+  </div>
+  <div class="stat"><span class="stat-num">{{ snap.following_count | compact }}</span><span class="stat-label">following</span></div>
+  <div class="stat"><span class="stat-num">{{ snap.post_count | compact }}</span><span class="stat-label">posts</span></div>
+  <div class="stat">
+    <span class="stat-num">{{ new_usernames | length if prev else '—' }}</span>
+    <span class="stat-label">new in this list</span>
+    {% if not prev %}<span class="delta">first check</span>{% endif %}
+  </div>
+</section>
+
+{% if not is_latest %}
+  <div class="flash flash-info">
+    You're viewing an older snapshot from {{ snap.taken_at | ago }}.
+    <a href="{{ url_for('profile', username=snap.target) }}">Go to the latest</a>
+  </div>
+{% endif %}
+
+<div class="layout">
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>Most recent followers</h2>
+        <p class="muted small">{{ followers | length }} fetched {{ snap.taken_at | ago }}, newest first</p>
+      </div>
+      <div class="toolbar">
+        <input type="search" id="filter" placeholder="Filter" aria-label="Filter followers">
+        {% if prev %}
+          <label class="toggle"><input type="checkbox" id="only-new"> Only new</label>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if followers %}
+      <ol class="followers" id="followers">
+        {% for f in followers %}
+          {% set is_new = f.username in new_usernames %}
+          <li class="follower{% if is_new %} is-new{% endif %}" data-search="{{ (f.username ~ ' ' ~ f.full_name) | lower }}" data-new="{{ 1 if is_new else 0 }}">
+            <span class="rank">{{ loop.index }}</span>
+            {{ avatar(f.profile_pic_url, f.username) }}
+            <div class="follower-body">
+              <a class="follower-user" href="https://www.instagram.com/{{ f.username }}/" rel="noopener noreferrer" target="_blank">@{{ f.username }}</a>
+              {{ badges(f.is_verified, f.is_private) }}
+              {% if is_new %}<span class="badge badge-new">New</span>{% endif %}
+              {% if f.full_name %}<div class="muted truncate">{{ f.full_name }}</div>{% endif %}
+            </div>
+            <a class="icon-btn" href="{{ url_for('profile', username=f.username) }}" title="Look up @{{ f.username }}'s followers">→</a>
+          </li>
+        {% endfor %}
+      </ol>
+      <p class="empty small" id="no-match" hidden>No followers match that filter.</p>
+    {% else %}
+      <div class="empty"><p>Instagram returned no followers for this account.</p></div>
+    {% endif %}
+  </section>
+
+  <aside class="side">
+    <div class="panel">
+      <h3>Check again</h3>
+      <form method="post" action="{{ url_for('refresh', username=snap.target) }}" data-loading="Fetching followers of @{{ snap.target }}…">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {{ limit_select(selected=snap.requested) }}
+        <button class="btn btn-primary btn-block" type="submit">Fetch now</button>
+      </form>
+      <p class="muted small">Saves a new snapshot and marks followers that weren't in the previous one.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Export</h3>
+      <div class="btn-row">
+        <a class="btn" href="{{ url_for('export', username=snap.target, fmt='csv', snapshot=snap.id) }}">CSV</a>
+        <a class="btn" href="{{ url_for('export', username=snap.target, fmt='json', snapshot=snap.id) }}">JSON</a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>History</h3>
+      <ol class="history">
+        {% for h in history %}
+          <li{% if h.id == snap.id %} class="current"{% endif %}>
+            <a href="{{ url_for('profile', username=snap.target, snapshot=h.id) }}">
+              <span title="{{ h.taken_at }}">{{ h.taken_at | ago }}</span>
+              <span class="muted">{{ h.follower_count | compact }} · {{ h.fetched }} listed</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+      <form method="post" action="{{ url_for('delete', username=snap.target) }}" data-confirm="Delete every saved snapshot of @{{ snap.target }}?">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn btn-danger btn-block" type="submit">Delete history</button>
+      </form>
+    </div>
+  </aside>
+</div>
+{% endblock %}

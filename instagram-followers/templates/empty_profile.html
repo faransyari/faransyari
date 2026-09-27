@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "_macros.html" import limit_select with context %}
+{% block title %}@{{ target }} · Follower Lookup{% endblock %}
+{% block content %}
+<div class="empty empty-big">
+  <h1>@{{ target }}</h1>
+  <p>You haven't looked this account up yet.</p>
+  <form class="inline-form" method="post" action="{{ url_for('refresh', username=target) }}" data-loading="Fetching followers of @{{ target }}…">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {{ limit_select(selected=20) }}
+    <button class="btn btn-primary" type="submit">Fetch followers</button>
+  </form>
+</div>
+{% endblock %}
